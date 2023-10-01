@@ -13,8 +13,8 @@ int main (int argc, char *argv[]) {
 	int target2 = 6;
 	int target3 = 6;
 	int target4 = 6;
-	vector<int> result = twoSum(nums, target);
-	std::cout << "first " << result[0] << " " << result[1] << std::endl;
+	//vector<int> result = twoSum(nums, target);
+	//std::cout << "first " << result[0] << " " << result[1] << std::endl;
 	vector<int> result2 = twoSum(nums2, target2);
 	std::cout << "second " << result2[0] << " " << result2[1] << std::endl;
 	vector<int> result3 = twoSum(nums3, target3);
@@ -27,29 +27,19 @@ int main (int argc, char *argv[]) {
 
 vector<int> twoSum(vector<int>& nums, int target)
 {
-	int firstIndex;
-	int secondIndex;
+	int lead;
+	int follow;
 	
-	for (auto ii = 0; ii < nums.size() - 1; ++ii)
+	for (auto followidx = 0; followidx < nums.size() - 1; ++followidx)
 	{
-		for (auto kk = ii + 1; kk < nums.size() - 1; ++kk)
+		for (auto leadidx = followidx + 1; leadidx < nums.size(); ++leadidx)
 		{
-			if (kk < nums.size() && nums[ii] + nums[kk] == target)
+			if (leadidx < nums.size() && nums[followidx] + nums[leadidx] == target)
 			{
-				firstIndex = ii;
-				secondIndex = kk;
+				lead = leadidx;
+				follow = followidx;
 			}
 		}
 	}
-	/*
-	for (auto ii = 0; ii < nums.size() - 1; ++ii)
-	{
-		if (nums[ii] + nums[ii + 1] == target)
-		{
-			firstIndex = ii;
-			secondIndex = ii + 1;
-		}
-	}
-    */
-	return vector<int>{firstIndex, secondIndex};
+	return vector<int>{lead, follow};
 }
