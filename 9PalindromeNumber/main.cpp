@@ -1,42 +1,42 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 bool isPalindrome(int x);
 int main()
 {
-	int num1 = 121;
-	int num2 = -121;
-	int num3 = 10;
-	int num4 = 1023;
-	//isPalindrome(num1);
-	//isPalindrome(num2);
-	//isPalindrome(num3);
-	isPalindrome(num4);
+	vector<int> test_cases { 121, -121, 10, 1023 };
+	for (auto n : test_cases) {
+		
+		if (isPalindrome(n))
+		{
+			cout << n << " is a palindrome" << endl;
+		}
+		else {
+			cout << n << " is not a palindrome" << endl;
+		}
+	}
 	return 0;
 }
 
 bool isPalindrome(int x)
 {
 	if (x < 0) return false;
-	int magnitude = log10(x) + 1;
-	vector<int> digits(magnitude);
-	for (auto left = 0, right = magnitude - 1; left < magnitude; ++left)
+	if (x == 0) return true;
+	int num_digits = log10(x) + 1;
+	cout << "There are " << num_digits << " digits" << endl;
+	vector<int> digits(num_digits);
+	for (auto left = 0; left < num_digits; ++left)
 	{
 		digits[left] = x % 10;
-		digits[right] = x %  int(pow(10, magnitude - 2));
-		cout << "power thing " << int(pow(10, magnitude - 2)) << endl;
-		cout << digits[left] << endl;
-		cout << digits[right] << endl;
-		//x /= 10;
+		x /= 10;
 	}
-
-	/*
-	for (auto ii = 0; ii < digits.size(); ++ii)
-	{
-		cout << digits[ii] << endl;
-	}
-	*/	
+	
+	auto digits2 = digits; 
+	reverse(digits2.begin(), digits2.end());
+	if (digits == digits2) return true;
+	else return false;
 	return true;
 }
